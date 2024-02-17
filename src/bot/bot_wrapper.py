@@ -1,15 +1,16 @@
 import os
 import telebot
 from dotenv import find_dotenv, load_dotenv
+from telebot.storage import StateMemoryStorage
 
 
 class BotWrapper(telebot.TeleBot):
     """
     Initializes <telebot.Telebot> object with token and webhook url taken from local .env file
     """
-    def __init__(self):
+    def __init__(self, state_storage: StateMemoryStorage):
         token, url = self._get_data_for_bot()
-        super().__init__(token)
+        super().__init__(token, state_storage=state_storage)
         self.set_webhook(url)
 
     def _get_data_for_bot(self) -> (str, str):
