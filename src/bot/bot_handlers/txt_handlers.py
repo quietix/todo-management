@@ -51,3 +51,9 @@ def confirm_registration(message: Message):
 def cancel_registration(message: Message):
     interaction_manager.cancel_registration(message.chat.id)
     BOT.delete_state(message.from_user.id, message.chat.id)
+
+
+@BOT.message_handler(commands=[variables.lists])
+def sections(message: Message):
+    user_sections: list = db_manager.get_sections(message.from_user.id)
+    interaction_manager.send_sections(message.chat.id, user_sections)

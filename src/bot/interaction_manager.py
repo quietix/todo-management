@@ -1,7 +1,9 @@
 from bot.setup_bot import BOT
 from telebot.types import Message
+from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 from telebot.types import ReplyKeyboardMarkup, ReplyKeyboardRemove, KeyboardButton
 from bot.response_phrases import variables
+from bot.models import Section, SectionItem
 
 
 class InteractionManager:
@@ -37,3 +39,19 @@ class InteractionManager:
                          reply_markup=ReplyKeyboardRemove())
         # TODO call suggestion method
 
+    def send_sections(self, chat_id, sections: list[Section]):
+        markup = InlineKeyboardMarkup()
+        markup.row_width = 2
+
+        for i in range(0, len(sections), 2):
+            section_name1 = sections[i].section_name
+            section_name2 = sections[i + 1].section_name
+
+            markup.add(InlineKeyboardButton(section_name1, callback_data=section_name1),
+                       InlineKeyboardButton(section_name2, callback_data=section_name2))
+
+        markup.add(InlineKeyboardButton("Add section", callback_data='add_section'))
+
+        BOT.send_message(chat_id, "Your sections:", reply_markup=markup)
+
+# TODO implement logger

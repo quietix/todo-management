@@ -1,6 +1,7 @@
 from django.contrib import admin
 
-from bot.models import User
+from bot.models import User, Section, SectionItem
 
-# todo
 admin.site.register(User)
+admin.site.register(Section)
+admin.site.register(SectionItem)

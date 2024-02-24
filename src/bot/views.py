@@ -5,6 +5,7 @@ from bot.bot_handlers import txt_handlers
 from bot.setup_bot import BOT
 
 
+
 @csrf_exempt
 def index(request):
     if request.method == "POST":

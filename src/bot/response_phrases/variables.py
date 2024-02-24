@@ -4,3 +4,5 @@ start_cmd = 'start'
 
 ask_register_positive = 'Register'
 ask_register_negative = 'Cancel'
+
+lists = 'sections'
